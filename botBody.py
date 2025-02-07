@@ -6,7 +6,6 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.client.default import DefaultBotProperties
 
 from decouple import config
-from asyncpg_lite import DatabaseManager
 
 admins = [int(admin_id) for admin_id in config('ADMINS').split(',')]
 
@@ -20,12 +19,19 @@ connection = sqlite3.connect("database.db")
 cursor = connection.cursor()
 
 cursor.execute('''
-CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY,
-    user_id INTEGER UNIQUE,
-    username TEXT,
-    item TEXT,
-    cost TEXT
+CREATE TABLE IF NOT EXISTS products (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    item TEXT NOT NULL,
+    price REAL NOT NULL
+)
+''')
+
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS cart (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    item_id INTEGER NOT NULL,
+    FOREIGN KEY (item_id) REFERENCES products (id)
 )
 ''')
 
