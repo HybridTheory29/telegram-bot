@@ -4,7 +4,8 @@ from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardMar
 def main_kb(user_telegram_id: int):
     kb_list = [
     [KeyboardButton(text='Корзина')],
-    [KeyboardButton(text='Назад')]
+    [KeyboardButton(text='Главное меню')],
+    [KeyboardButton(text='Очистить корзину')]
     ]
     
     if user_telegram_id in admins:
@@ -25,8 +26,8 @@ def action_kb():
 def item_kb():
     
     kb_list = [
-    [InlineKeyboardButton(text='Кроссовки👟', callback_data='Кроссовки👟'), InlineKeyboardButton(text='Кофты', callback_data='Кофты'),],
-    [InlineKeyboardButton(text='Футболки👕', callback_data='Футболки👕'), InlineKeyboardButton(text='Косметика💅🏻/Аксессуары⌚️', callback_data='Косметика💅🏻/Аксессуары⌚️')]
+    [InlineKeyboardButton(text='Кроссовки👟', callback_data='item_Кроссовки👟'), InlineKeyboardButton(text='Кофты', callback_data='item_Кофты'),],
+    [InlineKeyboardButton(text='Футболки👕', callback_data='item_Футболки👕'), InlineKeyboardButton(text='Косметика💅🏻/Аксессуары⌚️', callback_data='item_Косметика💅🏻/Аксессуары⌚️')]
     ]
     keyboard = InlineKeyboardMarkup(inline_keyboard=kb_list)
     return keyboard
